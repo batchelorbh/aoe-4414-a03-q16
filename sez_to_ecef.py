@@ -77,12 +77,6 @@ ecef_y_km = sin(o_lon_rad) * sin(o_lat_rad) * s_km \
 
 ecef_z_km = -cos(o_lat_rad) * s_km + sin(o_lat_rad) * z_km
 
-'''
-print(ecef_x_km)
-print(ecef_y_km)
-print(ecef_z_km)
-'''
-
 #Calculate denominator for C_E and S_E equations
 denom = calc_denom(E_E, o_lat_rad)
 
@@ -90,21 +84,16 @@ C_E = R_E_KM / denom
 S_E = R_E_KM * (1 - E_E**2) / denom
 
 #Find ECEF vector components
-ecef2_x_km = (C_E + o_hae_km) * cos(o_lat_rad) * cos(o_lon_rad)
-ecef2_y_km = (C_E + o_hae_km) * cos(o_lat_rad) * sin(o_lon_rad)
-ecef2_z_km = (S_E + o_hae_km) * sin(o_lat_rad)
-
-'''
-print(ecef2_x_km)
-print(ecef2_y_km)
-print(ecef2_z_km)
-'''
+r_x_km = (C_E + o_hae_km) * cos(o_lat_rad) * cos(o_lon_rad)
+r_y_km = (C_E + o_hae_km) * cos(o_lat_rad) * sin(o_lon_rad)
+r_z_km = (S_E + o_hae_km) * sin(o_lat_rad)
 
 #Add ECEF vector and origin vector to get true ECEF components
-r_x_km = ecef_x_km + ecef2_x_km
-r_y_km = ecef_y_km + ecef2_y_km
-r_z_km = ecef_z_km + ecef2_z_km
+ecef_x_km = ecef_x_km + r_x_km
+ecef_y_km = ecef_y_km + r_y_km
+ecef_z_km = ecef_z_km + r_z_km
 
-print(r_x_km)
-print(r_y_km)
-print(r_z_km)
+#Print ECEF components
+print(ecef_x_km)
+print(ecef_y_km)
+print(ecef_z_km)

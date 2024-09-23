@@ -21,7 +21,7 @@
 #
 # Revision history:
 #    09/19/2024          Script created
-#    09/23/2024          Added origin calculation
+#    09/23/2024          Added position calculation
 #
 ###############################################################################
 

@@ -9,9 +9,9 @@
 # Other contributors: None
 #
 # Parameters:
-#    o_lat_deg           Latitude in degrees
-#    o_lon_deg           Longitude in degrees
-#    o_hae_km            Height above ellipsoid in km
+#    o_lat_deg           Origin latitude in degrees
+#    o_lon_deg           Origin longitude in degrees
+#    o_hae_km            Origin height above ellipsoid in km
 #    s_km                S component of SEZ coordinate frame in km
 #    e_km                E component of SEZ coordinate frame in km
 #    z_km                Z component of SEZ coordinate frame in km
@@ -62,11 +62,11 @@ else:
 
 #Main body of script
 
-#Convert lat and lon to radians
+#Convert origin lat and lon to radians
 o_lat_rad = o_lat_deg * DEG_TO_RAD
 o_lon_rad = o_lon_deg * DEG_TO_RAD
 
-#Calculate ECEF components using rotation matrices
+#Calculate origin ECEF components using rotation matrices
 ecef_x_km = cos(o_lon_rad) * sin(o_lat_rad) * s_km \
             + cos(o_lon_rad) * cos(o_lat_rad) * z_km \
             - sin(o_lon_rad) * e_km
@@ -88,7 +88,7 @@ r_x_km = (C_E + o_hae_km) * cos(o_lat_rad) * cos(o_lon_rad)
 r_y_km = (C_E + o_hae_km) * cos(o_lat_rad) * sin(o_lon_rad)
 r_z_km = (S_E + o_hae_km) * sin(o_lat_rad)
 
-#Add ECEF vector and origin vector to get true ECEF components
+#Add origin ECEF vector and position ECEF vector to get true ECEF components
 ecef_x_km = ecef_x_km + r_x_km
 ecef_y_km = ecef_y_km + r_y_km
 ecef_z_km = ecef_z_km + r_z_km
